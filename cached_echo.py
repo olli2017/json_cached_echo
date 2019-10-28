@@ -37,7 +37,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             action = parsed_json["action"]
             if action == "put":
                 if cache.exists(parsed_json["key"]):
-                    response["status"] = "OK"
+                    response["status"] = "Ok"
                 else:
                     response["status"] = "Created"
                 cache.set(parsed_json["key"], parsed_json["message"])
@@ -46,20 +46,20 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                 key = cache.get(parsed_json["key"])
 
                 if key is None:
-                    response["Status"] = "Not found"
+                    response["Status"] = "Not Found"
                 else:
+                    response["status"] = "Ok"
                     if type(key) is bytes:
                         response["message"] = key.decode('utf-8')
                     else:
                         response["message"] = key
-                    response["status"] = "OK"
 
             if action == "delete":
                 if cache.exists(parsed_json["key"]):
                     cache.delete(parsed_json["key"])
-                    response["status"] = "OK"
+                    response["status"] = "Ok"
                 else:
-                    response["status"] = "Not found"
+                    response["status"] = "Not Found"
 
             json_string = json.dumps(response)
-            sendMsg(conn, json_string)
+            sendMsg(conn, json_string + "\n")
