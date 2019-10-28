@@ -1,2 +1,20 @@
 **docker-compose build** - собрать  
 **docker-compose up** - запустить
+
+{ "action": "put", "key": 1, "message": "Hello"}  
+{"status": "Created"}
+
+{ "action": "get", "key": 1}  
+{"status": "Ok", "message": "Hello"}
+
+{ "action": "put", "key": 1, "message": "Another text"}  
+{"status": "Ok"}
+
+{ "action": "get", "key": 1}  
+{"status": "Ok", "message": "Another text"}
+
+{ "action": "delete", "key": 1}  
+{"status": "Ok"}
+
+{ "action": "delete", "key": 1}  
+{"status": "Not Found"}
