@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  echo-server:
+    build: .
+    ports:
+    - '2000:65432'
+    depends_on:
+    - rediska
+
+  rediska:
+    image: redis
+    ports:
+    - '7000:6379'
+    volumes:
+    - redis-data:/data
+
+volumes:
+  redis-data:
